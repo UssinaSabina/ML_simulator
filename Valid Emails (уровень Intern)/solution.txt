@@ -1,0 +1,9 @@
+If we read the documentation, it says something about compiling regular expressions. In that precise case, it makes sense: in order to go fast, Python will transform the 
+regexp into bytecode that a C engine can then use to perform the matching at fast speed.  
+
+When using a function like re.fullmatch the hood, the re library will create a Patternobject, compile the regular expression to bytecode, keep it in an attribute and link 
+the .fullmatch method of Pattern to that compiled code. Since we want to apply the same regexp many times, let’s compile it:
+      valid_email_compiled_regex = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+      
+Коротко о главном: Использование re.compile() и сохранение полученного объекта регулярного выражения для повторного использования более эффективно, когда выражение 
+будет использоваться несколько раз в одной программе.
